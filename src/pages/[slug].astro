@@ -1,0 +1,31 @@
+---
+import { getSeeds, filePath } from "../pb";
+import { Image } from "@astrojs/image/components";
+
+export async function getStaticPaths() {
+  return (await getSeeds()).map((seed) => ({
+    params: {
+      slug: seed.slug,
+    },
+    props: {
+      seed,
+    },
+  }));
+}
+
+interface Props {
+  seed: any;
+}
+
+const { seed } = Astro.props;
+---
+
+<h1>{seed.title}</h1>
+
+<Image
+  width={256}
+  aspectRatio={4 / 3}
+  src={filePath(seed, "image")}
+  format={"webp"}
+  alt="thing"
+/>

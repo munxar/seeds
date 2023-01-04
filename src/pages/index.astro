@@ -1,0 +1,18 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getSeeds } from "../pb";
+const seeds = await getSeeds();
+---
+
+<Layout title="Welcome to Astro.">
+  <main>
+    <h1>Seeds</h1>
+    {
+      seeds.map((seed) => (
+        <div>
+          <a href={seed.slug}>{seed.title}</a>
+        </div>
+      ))
+    }
+  </main>
+</Layout>
